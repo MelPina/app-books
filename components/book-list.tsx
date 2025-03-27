@@ -22,10 +22,10 @@ export function BookList({ books, onEdit, onDelete, isLoading }: BookListProps) 
       <CardContent>
         {isLoading ? (
           <div className="flex justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-primary"></div>
           </div>
         ) : books.length === 0 ? (
-          <p className="text-center py-8 text-muted-foreground">No se encontraron libros. Añade un nuevo libro para empezar.</p>
+          <p className="py-8 text-center text-muted-foreground">No se encontraron libros. Añade un nuevo libro para empezar.</p>
         ) : (
           <div className="overflow-x-auto">
             <Table>
@@ -44,11 +44,11 @@ export function BookList({ books, onEdit, onDelete, isLoading }: BookListProps) 
                     <TableCell>{book.isbn}</TableCell>
                     <TableCell>{book.title}</TableCell>
                     <TableCell>{book.author}</TableCell>
-                    <TableCell>{book.publicationYear}</TableCell>
+                    <TableCell>{book.publicationYear || ""}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="outline" size="icon" onClick={() => onEdit(book)}>
-                          <Pencil className="h-4 w-4" />
+                          <Pencil className="w-4 h-4" />
                         </Button>
                         <Button
                           variant="outline"
@@ -56,7 +56,7 @@ export function BookList({ books, onEdit, onDelete, isLoading }: BookListProps) 
                           onClick={() => onDelete(book.id)}
                           className="text-red-500 hover:text-red-700"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
                     </TableCell>

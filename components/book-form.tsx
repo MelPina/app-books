@@ -31,7 +31,14 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
 
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData)
+      setFormData({
+        id: initialData.id,
+        isbn: initialData.isbn || "",
+        title: initialData.title || "",
+        author: initialData.author || "",
+        publicationYear: initialData.publicationYear || "",
+        description: initialData.description || "",
+      })
     } else {
       setFormData({
         id: 0,
@@ -107,11 +114,11 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
               placeholder="Introduce el ISBN"
               className={errors.isbn ? "border-red-500" : ""}
             />
-            {errors.isbn && <p className="text-red-500 text-sm">{errors.isbn}</p>}
+            {errors.isbn && <p className="text-sm text-red-500">{errors.isbn}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Titulo</Label>
             <Input
               id="title"
               name="title"
@@ -120,11 +127,11 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
               placeholder="Introduce el título del libro"
               className={errors.title ? "border-red-500" : ""}
             />
-            {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+            {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="author">Author</Label>
+            <Label htmlFor="author">Autor</Label>
             <Input
               id="author"
               name="author"
@@ -133,7 +140,7 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
               placeholder="Introduce el nombre del autor"
               className={errors.author ? "border-red-500" : ""}
             />
-            {errors.author && <p className="text-red-500 text-sm">{errors.author}</p>}
+            {errors.author && <p className="text-sm text-red-500">{errors.author}</p>}
           </div>
 
           <div className="space-y-2">
@@ -148,7 +155,7 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Descricción</Label>
+            <Label htmlFor="description">Descripción</Label>
             <Textarea
               id="description"
               name="description"
@@ -160,14 +167,15 @@ export function BookForm({ onSubmit, initialData, onCancel, isLoading }: BookFor
           </div>
           <br />
         </CardContent>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex justify-center space-x-4">
           {initialData && (
             <Button type="button" variant="outline" onClick={onCancel}>
-              Cancel
+              Cancelar
             </Button>
           )}
+          <br />
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Guardando..." : initialData ? "Actualizar Libro" : "Registrar"}
+            {isLoading ? "Guardando..." : initialData ? "Actualizar" : "Registrar"}
           </Button>
         </CardFooter>
       </form>

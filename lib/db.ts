@@ -1,22 +1,22 @@
 import type { Book } from "@/types/book"
 
-// Check if we're running on the client side
+
 const isClient = typeof window !== "undefined"
 
-// Function to get books from localStorage
+
 export const getLocalBooks = (): Book[] => {
   if (!isClient) return []
   const storedBooks = localStorage.getItem("books")
   return storedBooks ? JSON.parse(storedBooks) : []
 }
 
-// Function to save books to localStorage
+
 export const saveLocalBooks = (books: Book[]) => {
   if (!isClient) return
   localStorage.setItem("books", JSON.stringify(books))
 }
 
-// Function to add a book to localStorage
+
 export const addLocalBook = (book: Book): Book => {
   const books = getLocalBooks()
   const newBook = {
@@ -28,7 +28,6 @@ export const addLocalBook = (book: Book): Book => {
   return newBook
 }
 
-// Function to update a book in localStorage
 export const updateLocalBook = (book: Book): Book | null => {
   const books = getLocalBooks()
   const index = books.findIndex((b) => b.id === book.id)
@@ -38,7 +37,6 @@ export const updateLocalBook = (book: Book): Book | null => {
   return book
 }
 
-// Function to delete a book from localStorage
 export const deleteLocalBook = (id: number): boolean => {
   const books = getLocalBooks()
   const filteredBooks = books.filter((b) => b.id !== id)
